@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="libs/chosen_v1.8.7/chosen.min.css">
+
+  <link rel="stylesheet" href="yk-stepper.css">
+</head>
+<body>
+  
+  <div id="stepper">
+    <div style="display: flex; flex-direction: column; row-gap: 10px; width: 150px;">
+      <input type="text" id="username">
+      <input type="email" id="email">
+      <input type="password" id="password">
+      <input type="password" id="confirm-password">
+      <textarea id="description"></textarea>
+      <select id="select">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+    </div>
+  </div>
+
+  <script src="libs/jquery-3.6.1/jquery-3.6.1.min.js"></script>
+  <script src="libs/chosen_v1.8.7/chosen.jquery.min.js"></script>
+  <script src="yk-stepper.js"></script>
+  <script>
+    $("#select").chosen({disable_search_threshold: 10});
+
+    let stepper = new Stepper({
+      stepperEl: document.getElementById("stepper")
+    })
+    stepper.registerStep({
+      name: "step1",
+      inputs: [
+        {
+          id: "username",
+          validation: [
+            Validator.required("This field is required"),
+            Validator.maxLength(120, "Max length is 120 character")
+          ]
+        },
+        {
+          id: "email",
+          validation: [
+            Validator.required("This field is required")
+          ]
+        },
+        {
+          id: "password",
+          validation: [
+            Validator.required("This field is required")
+          ]
+        },
+        {
+          id: "confirm-password",
+          validation: [
+            Validator.required("This field is required")
+          ]
+        },
+        "description",
+        // {
+        //   id: "select",
+        //   getValue: function() {
+        //     return "dddd"
+        //   }
+        // }
+      ]
+    })
+  </script>
+
+</body>
+</html>
